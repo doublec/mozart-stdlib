@@ -10,8 +10,8 @@
 
 VPATH		= @srcdir@
 SRCDIR		= @srcdir@
-CYGSRCDIR	= $(shell $(CYGPATH) $(SRCDIR))
 CYGPATH		= $(SRCDIR)/cygpath.sh
+CYGSRCDIR	= $(shell $(CYGPATH) $(SRCDIR))
 SRCTOP		= @top_srcdir@
 BUILDDIR	= $(shell pwd)
 CYGBUILDDIR	= $(shell $(CYGPATH) $(BUILDDIR))
@@ -220,6 +220,7 @@ all.bin	:: $(PKG_INSTALLS_BIN)
 %.o: %.cc
 	$(OZTOOL) c++ $(CFLAGS) $(PKG_CPPFLAGS) $(PKG_CFLAGS) -c $< -o $@
 %.ozf: %.oz
+	echo $OZLOAD
 	$(OZC) $(OZCFLAGS) -c $(shell $(CYGPATH) $<) -o $@
 %.exe: %.ozf
 	$(OZL) $(OZLFLAGS) -x $(shell $(CYGPATH) $<) -o $@
